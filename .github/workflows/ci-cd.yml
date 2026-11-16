@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: dimakozlov538-cpu/portfolio-devops
 
 jobs:
   lint-test-build-deploy:
@@ -49,4 +49,7 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
       - name: 7. Trigger Render Deploy
-        run: curl -fsS "${{ secrets.RENDER_DEPLOY_HOOK }}"
+        if: env.RENDER_HOOK != ''
+        env:
+          RENDER_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: curl -fsS "$RENDER_HOOK"

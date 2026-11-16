@@ -3,7 +3,7 @@ FROM nginxinc/nginx-unprivileged:1.27-alpine
 LABEL maintainer="Dmitry Kozlov" \
       description="Portfolio web application"
 
-# COPY --chown=nginx:nginx templates/index.html /usr/share/nginx/html/index.html
+COPY --chown=nginx:nginx templates/index.html /usr/share/nginx/html/index.html
 COPY --chown=nginx:nginx static /usr/share/nginx/html/static
 
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \

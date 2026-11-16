@@ -1,7 +1,9 @@
 FROM nginxinc/nginx-unprivileged:1.27-alpine
 
-LABEL maintainer="Dmitry Kozlov" \
-      description="Portfolio web application"
+LABEL org.opencontainers.image.authors="Dmitry Kozlov" \
+      org.opencontainers.image.description="Portfolio web application"
+
+COPY --chown=nginx:nginx nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --chown=nginx:nginx templates/index.html /usr/share/nginx/html/index.html
 COPY --chown=nginx:nginx static /usr/share/nginx/html/static
